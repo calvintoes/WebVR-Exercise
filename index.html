@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>360&deg; Game</title>
+    <meta name="description" content="360&deg; Slideshow">
+    <!-- https://github.com/aframevr/aframe/raw/master/dist/aframe-v0.7.1.min.js -->
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <!-- http://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js -->
+    <script src="https://aframe.io/releases/0.8.0/aframe-extras.js"></script>
+
+    <script>
+      AFRAME.registerComponent('start_game',{
+        init : function ( ) {
+          this.el.addEventListener ( 'click', function (evt) {
+            window.location="game.html";
+          } );
+        }
+      } );
+    </script>
+  </head>
+  <body>
+
+  <a-scene cursor="rayOrigin:mouse">
+    <a-assets>
+      <img id="pano7" src="media/pano7.jpg">
+      <a-asset-item id="ship-obj" src="models/spaceship.obj"></a-asset-item>
+      <a-asset-item id="ship-mtl" src="models/spaceship.mtl"></a-asset-item>
+    </a-assets>
+
+    <a-sky id="pano" src="media/pano7.jpg" rotation="0 0 0"></a-sky>
+    <a-entity position="-370.687 222.94 -529.306" rotation="-10 220 0" >
+      <a-camera drag-look-controls>
+        <a-cursor id="cursor"></a-cursor>
+      </a-camera>
+    </a-entity>
+    <!-- <a-box start_game="" visible="true" width="20" height="100" depth="3" position="0 0 0"></a-box> -->
+    <a-box start_game="" width="20" height="100" depth="3" position="-87.87712297621634 291.0821391443483 -86.37702594488786" rotation="0 39.014897487256334 0" geometry="width:300;height:90;depth:10"></a-box>
+    <a-text value="Start Game" width="20" position="-101.25895850133782 292.3565139347606 -98.38869016134822" rotation="0 -140.2078180580279 0" color="green" scale="50 35 50" text="align:center"></a-text>
+
+    <a-entity obj-model="obj: #ship-obj; mtl: #ship-mtl" position="-0.35 1.5 -1.0" scale="0.5 0.5 0.5" ></a-entity>
+  </a-scene>
+
+</body>
+</html>

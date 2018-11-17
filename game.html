@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>360&deg; Game</title>
+    <meta name="description" content="360&deg; Slideshow">
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+
+
+  </head>
+  <body>
+  <a-scene cursor="rayOrigin:mouse" physics="debug: true">
+    <a-assets>
+      <audio id="shoot-audio" src="sounds/laserbeam.wav"></audio>
+      <audio id="hit-audio" src="sounds/hit.ogg"></audio>
+      <audio id="background-audio" src="sounds/Castle-8-bit-Stein.mp3"></audio>
+      <a-asset-item id="ship-obj"  src="models/spaceship.obj"></a-asset-item>
+      <a-asset-item id="ship-mtl"  src="models/spaceship.mtl"></a-asset-item>
+      <a-asset-item id="ufo-obj"   src="models/flyingsaucer.obj"></a-asset-item>
+      <a-asset-item id="ufo-mtl"   src="models/flyingsaucer.mtl"></a-asset-item>
+      <img id="earth" src="media/alien-planet.jpg">
+      <img id="clouds" src="media/clouds_8k.png" >
+      <img id="explosion" src="media/explosion1.png"></img>
+    </a-assets>
+
+    <a-sky id="pano" src="media/pano7.jpg" rotation="0 0 0" radius="10000"></a-sky>
+    <a-entity position="0 0 20" rotation="0 0 0" >
+      <a-camera look-controls="enabled:false"></a-camera>
+    </a-entity>
+
+
+    <!-- EARTH and CLOUDS -->
+    <a-sphere wireframe="false" src="#earth" position="0 0 0" radius="8">
+      <a-animation attribute="rotation" dur="300000" fill="forwards" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+    </a-sphere>
+    <a-sphere src="#clouds" position="0 0 0" radius="8.2" material="opacity: 0.8; transparent: true">
+      <a-animation attribute="rotation" dur="200000" fill="forwards" to="0 360 0" easing="linear" repeat="indefinite"></a-animation>
+    </a-sphere>
+
+    <!-- SPACESHIP -->
+    <a-entity drag-rotate-component rotation="0 45 0" >
+      <a-entity id="ship" obj-model="obj: #ship-obj; mtl: #ship-mtl" position="-11 0 0" scale="0.005 0.005 0.005" rotation="300 90 0" ></a-entity>
+    </a-entity>
+
+    <!-- UFO -->
+    <a-entity id="ufo-pos" rotation="0 130 0" >
+      <a-entity class="ufo" id="ufo" obj-model="obj: #ufo-obj; mtl: #ufo-mtl" position="-9 0 0" scale="1.0 1.0 1.0" rotation="0 0 0" ></a-entity>
+    </a-entity>
+
+    <!-- BULLET -->
+    <a-entity id="bullet" rotation="0 125.20561004444842 -62.6880000019446">
+      <a-sphere id="beam" position="-19 0 0" radius="0.2" material="color:#2AF" sphere-collider="objects:.ufo;radius:0.2" geometry=""></a-sphere>
+      <a-animation id="anim" begin="startAnimation" end="endAnimation" attribute="rotation" dur="3000" fill="forwards" from="0 123.1047647956354 0" to="0 123.1047647956354 -360" easing="linear" repeat="indefinite"></a-animation>
+    </a-entity>
+
+
+<script src="drag-rotate-component.js" charset="utf-8"></script>
+</body>
+</html>
